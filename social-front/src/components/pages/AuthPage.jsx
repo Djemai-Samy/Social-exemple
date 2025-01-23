@@ -34,8 +34,9 @@ export default function AuthPage() {
         alert("Inscription échouée.")
       }}
       control={control}
-      className="flex flex-col gap-2 max-w-lg m-auto justify-center items-center p-4"
+      className="flex flex-col gap-2 max-w-lg m-auto justify-center items-center p-4 shadow-md"
     >
+      <h2 className="text-3xl font-semibold p-4">Inscription</h2>
       <Input type="email" {...register('email')} placeholder="Email" />
       <Error>{errors.email?.message}</Error>
 
