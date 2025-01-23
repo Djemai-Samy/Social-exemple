@@ -1,10 +1,17 @@
 import express from "express";
+import { UserController } from "./controllers/users-controller.js";
+import { connectToDB } from "./database/index.js";
 
 const PORT = 5000;
 const app = express();
 
+app.use(express.json());
+
+app.use('/api/users', UserController);
+
 app.listen(PORT, function () {
     console.log('Serveur lancé sur le port 5000');
+    connectToDB()
 })
 
 // Execice 1:
