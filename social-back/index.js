@@ -1,6 +1,6 @@
 import express from "express";
-import { UserController } from "./controllers/users-controller.js";
-import { connectToDB } from "./database/index.js";
+import { UserController } from "./src/controllers/users-controller.js";
+import { connectToDB } from "./src/database/index.js";
 
 const PORT = 5000;
 const app = express();
