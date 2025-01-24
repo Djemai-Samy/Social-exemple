@@ -1,10 +1,20 @@
-import { createContext, useState } from "react";
+import { useEffect, useState } from "react";
+import { UserContext } from "./UserContext";
 
-export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    (async () => {
+      const reponse = await fetch("/api/users/me", {
+        credentials: 'include'
+      });
+      const data = await reponse.json()
+      setUser(data);
+    })();
+  }, []);
+  
   async function signin(signinData) {
     try {
       const reponse = await fetch('/api/users/signin', {

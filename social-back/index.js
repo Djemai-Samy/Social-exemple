@@ -1,11 +1,12 @@
 import express from "express";
 import { UserController } from "./src/controllers/users-controller.js";
 import { connectToDB } from "./src/database/index.js";
-
+import cookieParser from "cookie-parser";
 const PORT = 5000;
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/users', UserController);
 

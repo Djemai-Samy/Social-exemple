@@ -1,6 +1,14 @@
-
+import { useContext } from "react"
+import { UserContext } from "../providers/UserContext";
 export default function ProfilPage() {
-    return (
-        <div>ProfilPage</div>
-    )
+  const { user } = useContext(UserContext);
+  console.log(user);
+
+  return (
+    <div>
+      <div>
+        {user?.email}
+      </div>
+    </div>
+  )
 }

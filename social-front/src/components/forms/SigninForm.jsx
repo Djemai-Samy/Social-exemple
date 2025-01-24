@@ -6,7 +6,7 @@ import Input from "../ui/Input";
 import Error from "../ui/Error";
 import Button from "../ui/Button";
 import { useContext, useState } from "react";
-import { UserContext } from "../providers/UserProvider";
+import { UserContext } from "../providers/UserContext";
 import { useNavigate } from "react-router";
 
 const singinSchema = z.object({

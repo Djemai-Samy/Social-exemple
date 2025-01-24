@@ -56,3 +56,22 @@ UserController.post('/signin', async (req, rep) => {
     // retourner le access_token, et les données de l'utilisateur
     return rep.json({ message: "SINGIN_SUCCESSFUL", access_token: access_token, user })
 })
+
+UserController.get('/me', async (req, rep) => {
+    const cookies = req.cookies;
+
+    if (!cookies.access_token) {
+        return rep.status(401).json({ message: "TOKEN_MISSING" });
+    }
+    const jwt = JWT.verify(cookies.access_token);
+
+    if (!jwt.success) {
+        return rep.status(401).json({ message: jwt.message });
+    }
+
+    const id = jwt.payload.data.id;
+    const userFromDB = await UserRepository.findByID(id);
+
+    // DTO: Data Transfert Object
+    return rep.json({ email: userFromDB.email, id: userFromDB._id, avatarURL: userFromDB.avatarURL });
+})
