@@ -10,11 +10,13 @@ export default function UserProvider({ children }) {
       const reponse = await fetch("/api/users/me", {
         credentials: 'include'
       });
-      const data = await reponse.json()
-      setUser(data);
+      if (reponse.status === 200) {
+        const data = await reponse.json()
+        setUser(data);
+      }
     })();
   }, []);
-  
+
   async function signin(signinData) {
     try {
       const reponse = await fetch('/api/users/signin', {
@@ -38,7 +40,12 @@ export default function UserProvider({ children }) {
     }
   }
 
+  async function logout() {
+    await fetch('/api/users/logout');
+    setUser(null);
+  }
+
   return (
-    <UserContext.Provider value={{ user, signin }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, signin, logout }}>{children}</UserContext.Provider>
   )
 }

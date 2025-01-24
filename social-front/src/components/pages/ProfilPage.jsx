@@ -1,8 +1,13 @@
 import { useContext } from "react"
 import { UserContext } from "../providers/UserContext";
+import { useNavigate } from "react-router";
 export default function ProfilPage() {
   const { user } = useContext(UserContext);
-  console.log(user);
+
+  const navigate = useNavigate();
+  if (!user) {
+    navigate('/auth')
+  }
 
   return (
     <div>

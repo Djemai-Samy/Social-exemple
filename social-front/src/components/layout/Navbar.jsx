@@ -1,10 +1,11 @@
 import { useContext } from "react"
 import { NavLink } from "react-router"
 import { UserContext } from "../providers/UserContext"
+import Button from "../ui/Button";
 
 
 export default function Navbar() {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
   const links = [
     {
       label: "Accueil",
@@ -22,6 +23,12 @@ export default function Navbar() {
           <li key={link.path}>
             <NavLink to={link.path}>{link.label}</NavLink>
           </li>))}
+
+        {user && (
+          <li>
+            <Button onClick={logout}>Déconnexion</Button>
+          </li>
+        )}
       </ul>
     </nav>
   )

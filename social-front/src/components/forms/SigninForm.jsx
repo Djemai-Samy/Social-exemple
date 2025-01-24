@@ -40,6 +40,8 @@ export default function SigninForm() {
         <form
             onSubmit={handleSubmit(submit)}
             className="flex flex-col gap-2 max-w-lg m-auto justify-center items-center p-4 shadow-md">
+            
+            <h2 className="text-3xl font-bold p-2">Connexion</h2>
             <Controller
                 name="email"
                 control={control}

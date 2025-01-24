@@ -74,4 +74,9 @@ UserController.get('/me', async (req, rep) => {
 
     // DTO: Data Transfert Object
     return rep.json({ email: userFromDB.email, id: userFromDB._id, avatarURL: userFromDB.avatarURL });
-})
+});
+
+UserController.get('/logout', async (req, rep) => {
+    rep.clearCookie('access_token');
+    return rep.json({ message: "LOGOUT_SUCCESSFUL" })
+});
