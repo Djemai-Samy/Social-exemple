@@ -1,6 +1,6 @@
 
 import { z } from "zod";
-import { useForm, Form } from "react-hook-form"
+import { useForm, Form, Controller } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "../ui/Input";
 import Error from "../ui/Error";
@@ -20,7 +20,7 @@ const registerSchema = z.object({
 
 
 export default function InscriptionForm() {
-  const { register, formState: { errors }, control, reset } = useForm(
+  const { formState: { errors }, control, reset } = useForm(
     { resolver: zodResolver(registerSchema) }
   );
   return (
@@ -37,13 +37,25 @@ export default function InscriptionForm() {
       className="flex flex-col gap-2 max-w-lg m-auto justify-center items-center p-4 shadow-md"
     >
       <h2 className="text-3xl font-semibold p-4">Inscription</h2>
-      <Input type="email" {...register('email')} placeholder="Email" />
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => <Input {...field} type="email" placeholder='Email' />}
+      />
       <Error>{errors.email?.message}</Error>
 
-      <Input type="password" {...register('password')} placeholder="Mot de passe" />
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => <Input {...field} type="password" placeholder='Mot de passe' />}
+      />
       <Error>{errors.password?.message}</Error>
 
-      <Input type="password" {...register('confirmPassword')} placeholder="Confirmation du mot de passe" />
+      <Controller
+        name="confirmPassword"
+        control={control}
+        render={({ field }) => <Input {...field} type="password" placeholder='Confirmez votre mot de passe' />}
+      />
       <Error>{errors.confirmPassword?.message}</Error>
 
       <Button type="submit">{"S'inscrire"}</Button>

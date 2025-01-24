@@ -45,7 +45,7 @@ UserController.post('/signin', async (req, rep) => {
     // Créer un jwt
     const access_token = JWT.sign({ id: userFromDB._id });
     // Ajouter le token dans les cookies
-    rep.cookie("access_token", access_token, { httpOnly: true, sameSite: "strict" });
+    rep.cookie("access_token", access_token, { httpOnly: true, sameSite: "strict", secure: false });
 
     const user = {
         _id: userFromDB._id,

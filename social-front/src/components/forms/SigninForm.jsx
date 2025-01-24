@@ -7,6 +7,7 @@ import Error from "../ui/Error";
 import Button from "../ui/Button";
 import { useContext, useState } from "react";
 import { UserContext } from "../providers/UserProvider";
+import { useNavigate } from "react-router";
 
 const singinSchema = z.object({
     email: z.string({ required_error: "Email obligatoire" }).
@@ -17,17 +18,28 @@ const singinSchema = z.object({
 
 export default function SigninForm() {
 
-    const { register, handleSubmit, formState: { errors }, control } = useForm({ resolver: zodResolver(singinSchema) })
+    const { handleSubmit, formState: { errors }, control } = useForm({ resolver: zodResolver(singinSchema) })
 
-    const { signin } = useContext(UserContext);
+    const { user, signin } = useContext(UserContext);
     const [backEndreponse, setBackendReponse] = useState(null);
 
+    const navigate = useNavigate();
+
+    if (user) {
+        return navigate('/profil');
+    }
     async function submit(data) {
         const signinReponse = await signin(data);
+        if (signinReponse.success) {
+            return navigate('/profil');
+        }
         setBackendReponse(signinReponse);
     }
+
     return (
-        <form onSubmit={handleSubmit(submit)}>
+        <form
+            onSubmit={handleSubmit(submit)}
+            className="flex flex-col gap-2 max-w-lg m-auto justify-center items-center p-4 shadow-md">
             <Controller
                 name="email"
                 control={control}
@@ -43,8 +55,11 @@ export default function SigninForm() {
             <Error>{errors.password?.message}</Error>
 
             <Button>Connexion</Button>
-
-            <Error>{backEndreponse ? backEndreponse.message : ""}</Error>
+            {
+                backEndreponse?.success ?
+                    <p>{backEndreponse?.message}</p> :
+                    <Error>{backEndreponse?.message}</Error>
+            }
         </form>
     )
 }

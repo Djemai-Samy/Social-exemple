@@ -1,6 +1,7 @@
 import Navbar from './components/layout/Navbar';
 import AccueilPage from './components/pages/AccueilPage';
 import AuthPage from './components/pages/AuthPage';
+import ProfilPage from './components/pages/ProfilPage';
 import UserProvider from './components/providers/UserProvider';
 import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router";
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<AccueilPage />} />
             <Route path="/auth" element={<AuthPage />} />
+            <Route path="/profil" element={<ProfilPage />} />
           </Routes>
         </main>
       </UserProvider>
