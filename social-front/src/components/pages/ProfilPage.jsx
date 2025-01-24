@@ -20,7 +20,7 @@ export default function ProfilPage() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       {isEditingDetails ? <UserDetailsForm user={user} /> : <UserDetails user={user} />}
       <Button onClick={toggleEditingDetails}>Modifier vos informations</Button>
     </div>
