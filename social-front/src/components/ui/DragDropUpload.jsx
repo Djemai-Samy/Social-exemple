@@ -41,7 +41,7 @@ export default function DragDropUpload({ onSelectFile }) {
             <p className="text-3xl text-center text-foreground/50">Glisser une image</p>
             {preview ?
                 (<img src={preview} alt="" />) :
-                <ImageUp className={`w-64 h-64 m-auto ${dragActive ? "text-primary" : "text-foreground/50"}`} />}
+                <ImageUp className={`w-64 h-64 m-auto text-red-600 ${dragActive ? "text-primary" : "text-foreground/50"}`} />}
             <input
                 ref={inputRef}
                 type="file"

@@ -17,7 +17,7 @@ export default function UserDetailsForm() {
     return (
         <form onSubmit={submit} className="flex flex-col justify-center items-center p-2 w-full">
             <DragDropUpload onSelectFile={onSelectFile} />
-            <Button>Upload avatar</Button>
+            <Button color="destructive" size="lg" className='bg-blue-500'>Upload avatar</Button>
         </form>
     )
 }
