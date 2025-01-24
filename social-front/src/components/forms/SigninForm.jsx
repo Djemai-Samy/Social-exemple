@@ -43,14 +43,16 @@ export default function SigninForm() {
             <Controller
                 name="email"
                 control={control}
-                render={({ field }) => <Input {...field} type="email" placeholder='Email' />}
+                render={({ field }) => (
+                    <Input {...field} autoComplete="email" type="email" placeholder='Email' ref={null} />)}
             />
             <Error>{errors.email?.message}</Error>
 
             <Controller
                 name="password"
                 control={control}
-                render={({ field }) => <Input {...field} type="password" placeholder='Mot de passe' />}
+                render={({ field }) => (
+                    <Input {...field} autoComplete={"new-password"} type="password" placeholder='Mot de passe' ref={null} />)}
             />
             <Error>{errors.password?.message}</Error>
 
